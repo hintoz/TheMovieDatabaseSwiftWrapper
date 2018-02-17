@@ -29,26 +29,34 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 
-class TMDBSwiftTests: XCTestCase {
-  var key = "8a7a49369d1af6a70ec5a6787bbfcf79"
-  
-  
+class TMDBSwiftTests: XCTestCase {  
+	
+	override func setUp() {
+		super.setUp()
+		// Put setup code here. This method is called before the invocation of each test method in the class.
+		TMDBConfig.apikey = "8a7a49369d1af6a70ec5a6787bbfcf79"
+	}
+	
+	override func tearDown() {
+		// Put teardown code here. This method is called after the invocation of each test method in the class.
+		super.tearDown()
+	}
+	
   //MARK: CollectionMDB Test
   
   func testCollection() {
     var data: CollectionMDB?
     let expectation = self.expectation(description: "Wait for data to load.")
-    
-    
-    CollectionMDB.collection(key, collectionId: 10){
-      coll in
-      data = coll.1!
+		
+    CollectionMDB.collection(collectionId: 10){
+      _, collection in
+      data = collection
       expectation.fulfill()
     }
-    
+		
     waitForExpectations(timeout: 30, handler: nil)
     XCTAssertNotNil(data)
-    
+		
     XCTAssertEqual(data?.id, 10)
     XCTAssertEqual(data?.name, "Star Wars Collection")
     XCTAssertNotNil(data?.backdrop_path)
@@ -57,20 +65,20 @@ class TMDBSwiftTests: XCTestCase {
     XCTAssertTrue(data?.collectionItems.count > 0)
     XCTAssertNotNil(data?.poster_path)
   }
-  
-  //MARK: Configuration
-  
+
+//  //MARK: Configuration
+	
   func testConfiguration() {
     var data: ConfigurationMDB?
     let expectation = self.expectation(description: "Wait for data to load.")
-    
-    
-    ConfigurationMDB.configuration(key){
-      config in
-      data = config.1
+		
+		
+    ConfigurationMDB.configuration(){
+      _, config in
+      data = config
       expectation.fulfill()
     }
-    
+		
     waitForExpectations(timeout: 30, handler: nil)
     XCTAssertNotNil(data)
     XCTAssertTrue(data?.backdrop_sizes.count > 0)
@@ -81,25 +89,25 @@ class TMDBSwiftTests: XCTestCase {
     XCTAssertTrue(data?.poster_sizes.count > 0)
     XCTAssertTrue(data?.still_sizes.count > 0)
     XCTAssertTrue(data?.logo_sizes.count > 0)
-    
+		
   }
-  
-  
-  //MARK: Company
-  
+
+
+//  //MARK: Company
+	
   func testCompany() {
     var data: CompanyMDB?
     let expectation = self.expectation(description: "Wait for data to load.")
-    
-    CompanyMDB.companyInfo(key, companyId: 5){
-      company in
-      data = company.1
+		
+    CompanyMDB.companyInfo(companyId: 5){
+      _, company in
+      data = company
       expectation.fulfill()
     }
-    
+		
     waitForExpectations(timeout: 5, handler: nil)
     XCTAssertNotNil(data)
-    
+		
     XCTAssertEqual(data?.id, 5)
     XCTAssertEqual(data?.name, "Columbia Pictures")
     XCTAssertNotNil(data?.logo_path)
@@ -109,8 +117,6 @@ class TMDBSwiftTests: XCTestCase {
 //    XCTAssertEqual(data?.parent_company?.name, "Sony Pictures Entertainment")
 //    XCTAssertEqual(data?.parent_company?.id, 5752)
     XCTAssertNotNil(data?.parent_company?.logo_path)
-    
   }
-  
   
 }

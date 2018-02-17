@@ -3,7 +3,7 @@
 //  MDBSwiftWrapper
 //
 //  Created by George Kye on 2016-02-12.
-//  Copyright © 2016 George KyeKye. All rights reserved.
+//  Copyright © 2016 George Kye. All rights reserved.
 //
 
 import Foundation
@@ -11,8 +11,8 @@ import Foundation
 extension Client{
   
   
-  static func Genres(_ api_key: String!, listType: String, language: String?, genreId: Int, page: Double?, include_all_movies: Bool?, include_adult: Bool?, movieList: Bool?, completion: @escaping (ClientReturn) -> ()) -> (){
-    var parameters: [String : AnyObject] = ["api_key": api_key as AnyObject]
+  static func Genres(listType: String, language: String?, genreId: Int, page: Double?, include_all_movies: Bool?, include_adult: Bool?, movieList: Bool?, completion: @escaping (ClientReturn) -> ()) -> (){
+    var parameters: [String : AnyObject] = [:]
     var url = "";
     if(movieList == false || movieList == nil){
       url = "https://api.themoviedb.org/3/genre/" + listType + "/list";

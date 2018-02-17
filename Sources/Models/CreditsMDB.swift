@@ -3,7 +3,7 @@
 //  MDBSwiftWrapper
 //
 //  Created by George Kye on 2016-03-07.
-//  Copyright © 2016 George KyeKye. All rights reserved.
+//  Copyright © 2016 George Kye. All rights reserved.
 //
 
 import Foundation
@@ -54,8 +54,8 @@ public struct Credits_Media{
     }
     
     if(media["seasons"].count > 0){
-      for i in 0...media["seasons"].count {
-        seasons.append(Credits_Seasons.init(seasons: media["seasons"][i]))
+      seasons = media["seasons"].map{
+        Credits_Seasons.init(seasons: $0.1)
       }
     }
   }
@@ -83,8 +83,8 @@ public struct CreditsMDB{
   }
   
   /// Get the detailed information about a particular credit record. This is currently only supported with the new credit model found in TV. These ids can be found from any TV credit response as well as the tv_credits and combined_credits methods for people. The episodes object returns a list of episodes and are generally going to be guest stars. The season array will return a list of season numbers.
-  public static func credits(_ apiKey: String, creditID: String, language: String, completion: @escaping (_ clientReturn: ClientReturn, _ data: CreditsMDB?) -> ()) -> (){
-    Client.Credits(apiKey, creditID: creditID, language: language){
+  public static func credits(creditID: String, language: String, completion: @escaping (_ clientReturn: ClientReturn, _ data: CreditsMDB?) -> ()) -> (){
+    Client.Credits(creditID: creditID, language: language){
       apiReturn in
       if(apiReturn.error == nil){
         completion(apiReturn, CreditsMDB.init(credits: apiReturn.json!))

@@ -3,7 +3,7 @@
 //  MDBSwiftWrapper
 //
 //  Created by George Kye on 2016-02-17.
-//  Copyright © 2016 George KyeKye. All rights reserved.
+//  Copyright © 2016 George Kye. All rights reserved.
 //
 
 import Foundation
@@ -24,10 +24,10 @@ public struct Alternative_TitlesMDB {
   
   public init(results: JSON){
     id = results["id"].int
-    if(results["results"] != nil){ //TV Changes
+    if(results["results"].exists()){ //TV Changes
       titles = Alt_TitlesMDB.initialize(json: results["results"])
       
-    }else if (results["titles"] != nil){
+    }else if (results["titles"].exists()){
       titles = Alt_TitlesMDB.initialize(json: results["titles"])
     }
   }

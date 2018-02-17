@@ -3,10 +3,8 @@
 //  MDBSwiftWrapper
 //
 //  Created by George Kye on 2016-03-08.
-//  Copyright © 2016 George KyeKye. All rights reserved.
+//  Copyright © 2016 George Kye. All rights reserved.
 //
-
-
 
 //MARK: Person
 
@@ -41,9 +39,9 @@ public struct PersonMDB: ArrayObject{
   }
   
   ///Get the general person information for a specific id.
-  public static func person_id(_ api_key: String!, personID: Int!, completion: @escaping (_ clientReturn: ClientReturn, _ data: PersonMDB?) ->()) ->(){
+  public static func person_id(personID: Int!, completion: @escaping (_ clientReturn: ClientReturn, _ data: PersonMDB?) ->()) ->(){
     let urlType = String(personID)
-    Client.Person(urlType, api_key: api_key, language: nil, page: nil){
+    Client.Person(urlType,  language: nil, page: nil){
       apiReturn in
       var data: PersonMDB?
       if(apiReturn.error == nil){
@@ -55,9 +53,9 @@ public struct PersonMDB: ArrayObject{
   
   
   ///Get the movie credits for a specific person id.
-  public static func movie_credits(_ api_key: String!, personID: Int!, language: String?, completion: @escaping (_ clientReturn: ClientReturn, _ data: PersonMovieCredits?) -> ()) ->(){
+  public static func movie_credits(personID: Int!, language: String?, completion: @escaping (_ clientReturn: ClientReturn, _ data: PersonMovieCredits?) -> ()) ->(){
     let urlType = String(personID) + "/movie_credits"
-    Client.Person(urlType, api_key: api_key, language: language, page: nil){
+    Client.Person(urlType,  language: language, page: nil){
       apiReturn in
       var data: PersonMovieCredits?
       if(apiReturn.error == nil){
@@ -67,9 +65,9 @@ public struct PersonMDB: ArrayObject{
     }
   }
   ///Get the TV credits for a specific person id.
-  public static func tv_credits(_ api_key: String!, personID: Int!, language: String?, completion: @escaping (_ clientReturn: ClientReturn, _ data: PersonTVCredits?) -> ()) ->(){
+  public static func tv_credits(personID: Int!, language: String?, completion: @escaping (_ clientReturn: ClientReturn, _ data: PersonTVCredits?) -> ()) ->(){
     let urlType =  String(personID) + "/tv_credits"
-    Client.Person(urlType, api_key: api_key, language: language, page: nil){
+    Client.Person(urlType,  language: language, page: nil){
       apiReturn in
       var data: PersonTVCredits?
       if(apiReturn.error == nil){
@@ -80,9 +78,9 @@ public struct PersonMDB: ArrayObject{
   }
   
   ///Get the combined (movie and TV) credits for a specific person id.
-  public static func combined_credits(_ api_key: String!, personID: Int!, language: String?, completion: @escaping (_ clientReturn: ClientReturn, _ data: PersonCreditsCombined?) -> ()) ->(){
+  public static func combined_credits(personID: Int!, language: String?, completion: @escaping (_ clientReturn: ClientReturn, _ data: PersonCreditsCombined?) -> ()) ->(){
     let urlType =  String(personID) + "/combined_credits"
-    Client.Person(urlType, api_key: api_key, language: language, page: nil){
+    Client.Person(urlType,  language: language, page: nil){
       apiReturn in
       var data: PersonCreditsCombined?
       if(apiReturn.error == nil){
@@ -94,8 +92,8 @@ public struct PersonMDB: ArrayObject{
   
   
   ///Get the external ids for a specific person id.
-  public static func externalIDS(_ api_key: String!, personID: Int!, completion: @escaping (_ clientReturn: ClientReturn, _ data: ExternalIdsMDB?) -> ()) -> (){
-    Client.Person( String(personID) + "/external_ids", api_key: api_key, language: nil, page: nil){
+  public static func externalIDS(personID: Int!, completion: @escaping (_ clientReturn: ClientReturn, _ data: ExternalIdsMDB?) -> ()) -> (){
+    Client.Person( String(personID) + "/external_ids",  language: nil, page: nil){
       apiReturn in
       var data: ExternalIdsMDB?
       if(apiReturn.error == nil){
@@ -106,8 +104,8 @@ public struct PersonMDB: ArrayObject{
   }
   
   ///Get the images for a specific person id.
-  public static func images(_ api_key: String!, personID: Int!, completion: @escaping (_ client: ClientReturn, _ data: [Images_MDB]?) -> ()) -> (){
-    Client.Person( String(personID) + "/images", api_key: api_key, language: nil, page: nil){
+  public static func images(personID: Int!, completion: @escaping (_ client: ClientReturn, _ data: [Images_MDB]?) -> ()) -> (){
+    Client.Person( String(personID) + "/images",  language: nil, page: nil){
       apiReturn in
       var images: [Images_MDB]?
       if(apiReturn.error == nil){
@@ -118,20 +116,20 @@ public struct PersonMDB: ArrayObject{
     }
   }
   ///Get the images that have been tagged with a specific person id. Will return all of the image results with a media object mapped for each image.
-  public static func tagged_images(_ api_key: String!, personID: Int!, page: Int?, completion: @escaping (_ client: ClientReturn, _ data: TaggedImages?) -> ()) -> (){
-    Client.Person( String(personID) + "/tagged_images", api_key: api_key, language: nil, page: page){
+  public static func tagged_images(personID: Int!, page: Int?, completion: @escaping (_ client: ClientReturn, _ data: TaggedImagesMDB?) -> ()) -> (){
+    Client.Person( String(personID) + "/tagged_images",  language: nil, page: page){
       apiReturn in
-      var images: TaggedImages?
-      if(apiReturn.error == nil){
-        images = TaggedImages.init(json: apiReturn.json!)
+      var images: TaggedImagesMDB?
+      if let json = apiReturn.json {
+        images = TaggedImagesMDB(json: json)
       }
       completion(apiReturn, images)
     }
   }
   
   ///Get the latest person id.
-  public static func latest(_ api_key: String!, completion: @escaping (_ clientReturn: ClientReturn, _ data: PersonMDB?) -> ()) -> (){
-    Client.Person("latest", api_key: api_key, language: nil, page: nil){
+  public static func latest(completion: @escaping (_ clientReturn: ClientReturn, _ data: PersonMDB?) -> ()) -> (){
+    Client.Person("latest",  language: nil, page: nil){
       apiReturn in
       var data: PersonMDB?
       if(apiReturn.error == nil){
@@ -142,8 +140,8 @@ public struct PersonMDB: ArrayObject{
   }
   
   ///Get the list of popular people on The Movie Database. This list refreshes every day.
-  public static func popular(_ api_key: String!, page: Int?, completion: @escaping (_ clientReturn: ClientReturn, _ data: [PersonResults]?) -> ()) -> (){
-    Client.Person("popular", api_key: api_key, language: nil, page: page){
+  public static func popular(page: Int?, completion: @escaping (_ clientReturn: ClientReturn, _ data: [PersonResults]?) -> ()) -> (){
+    Client.Person("popular",  language: nil, page: page){
       apiReturn in
       var data: [PersonResults]?
       if(apiReturn.error == nil){
@@ -154,9 +152,9 @@ public struct PersonMDB: ArrayObject{
   }
   
   ///Retrive data by append multiple person methods. Initlization of object has to be done manually. Exepect PersonMDB
-  public static func personAppendTo(_ api_key: String!, personID: Int!, append_to: [String], completion: @escaping (_ clientReturn: ClientReturn, _ data: PersonMDB?, _ json: JSON?) ->()) ->(){
+  public static func personAppendTo(personID: Int!, append_to: [String], completion: @escaping (_ clientReturn: ClientReturn, _ data: PersonMDB?, _ json: JSON?) ->()) ->(){
     let urlType =  String(personID)
-    Client.Person(urlType, api_key: api_key, language: nil, page: nil, append_to: append_to){
+    Client.Person(urlType,  language: nil, page: nil, append_to: append_to){
       apiReturn in
       var data: PersonMDB?
       if(apiReturn.error == nil){
@@ -301,20 +299,16 @@ public struct PersonCreditsCombined{
     var tvCast = [PersonTVCast]()
     var movieCrew = [PersonMovieCrew]()
     var movieCast = [PersonMovieCast]()
-    json["crew"].forEach(){
-      if $0.1["media_type"] == "tv'"{
-        tvCrew.append(PersonTVCrew.init(results: $0.1))
-      }else{
-        movieCrew.append(PersonMovieCrew.init(results: $0.1))
-      }
-    }
-    json["cast"].forEach(){
-      if $0.1["media_type"] == "tv"{
-        tvCast.append(PersonTVCast.init(results: $0.1))
-      }else{
-        movieCast.append(PersonMovieCast.init(results: $0.1))
-      }
-    }
+    
+    //Set TV and Movie crew data
+    tvCrew = json["crew"].filter{$0.1["media_type"] == "tv"}.map{PersonTVCrew.init(results: $0.1)}
+    
+    movieCrew = json["crew"].filter{$0.1["media_type"] == "movie"}.map{PersonMovieCrew.init(results: $0.1)}
+    
+    //Set TV and Movie cast Data
+    tvCast = json["cast"].filter{$0.1["media_type"] == "tv"}.map{PersonTVCast.init(results: $0.1)}
+    movieCast = json["cast"].filter{$0.1["media_type"] == "movie"}.map{PersonMovieCast.init(results: $0.1)}
+    
     id = json["id"].int
     tvCredits = (tvCrew, tvCast)
     movieCredits = (movieCrew, movieCast)
@@ -322,51 +316,33 @@ public struct PersonCreditsCombined{
   
 }
 
-open class TaggedImagesCommon: Images_MDB{
-  
-  open var id: String!
-  open var image_type: String!
-  open var media_type: String!
-  required public init(results: JSON) {
-    super.init(results: results)
-    id = results["id"].string
-    image_type = results["image_type"].string
-    media_type = results["media_type"].string
-  }
+public enum TaggedImageMediaMDB {
+  case movie(DiscoverMovieMDB)
+  case tv(DiscoverTVMDB)
 }
 
-open class TaggedImagesMovie: TaggedImagesCommon{
-  open var media: DiscoverMovieMDB!
+public class TaggedImageMDB: Images_MDB {
+  public var media: TaggedImageMediaMDB!
   public required init(results: JSON) {
     super.init(results: results)
-    media = DiscoverMovieMDB.init(results: results["media"])
+    if results["media_type"] == "movie"{
+      media = .movie(DiscoverMovieMDB(results: results["media"]))
+    }else if results["media_type"] == "tv"{
+      media = TaggedImageMediaMDB.tv(DiscoverTVMDB(results: results["media"]))
+    }
   }
 }
 
-open class TaggedImagesTV: TaggedImagesCommon{
-  open var media: DiscoverTVMDB!
-  public required init(results: JSON) {
-    super.init(results: results)
-    media = DiscoverTVMDB.init(results: results["media"])
-  }
-}
-
-public struct TaggedImages{
+public struct TaggedImagesMDB{
   
-  public var tvImages =  [TaggedImagesTV]()
-  public var movieImages =  [TaggedImagesMovie]()
+  public var images: [TaggedImageMDB] = []
   public var id: Int!
   public var pageResults: PageResultsMDB!
   
   public init(json: JSON){
     id = json["id"].int
-    pageResults = PageResultsMDB.init(results: json)
-    json["results"].forEach(){
-      if $0.1["media_type"] == "movie"{
-        movieImages.append(TaggedImagesMovie.init(results: $0.1))
-      }else{
-        tvImages.append(TaggedImagesTV.init(results: $0.1))
-      }
-    }
+    pageResults = PageResultsMDB(results: json)
+    images = TaggedImageMDB.initialize(json: json["results"])
   }
 }
+

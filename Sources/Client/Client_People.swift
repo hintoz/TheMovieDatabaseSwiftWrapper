@@ -3,16 +3,16 @@
 //  MDBSwiftWrapper
 //
 //  Created by George Kye on 2016-03-08.
-//  Copyright © 2016 George KyeKye. All rights reserved.
+//  Copyright © 2016 George Kye. All rights reserved.
 //
 
 import Foundation
 
 extension Client{
   
-  static func Person(_ urlType: String!, api_key: String!, language: String?, page: Int?, append_to: [String]? = nil, completion: @escaping (ClientReturn) -> ()) -> (){
+  static func Person(_ urlType: String!, language: String?, page: Int?, append_to: [String]? = nil, completion: @escaping (ClientReturn) -> ()) -> (){
     let url = "https://api.themoviedb.org/3/person/" + urlType
-    var parameters: [String : AnyObject] = ["api_key": api_key as AnyObject]
+    var parameters: [String : AnyObject] = [:]
     if(language != nil){ parameters["language"] = language as AnyObject? }
     if(page != nil){parameters["page"] = page as AnyObject?}
     if append_to != nil{

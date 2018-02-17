@@ -3,7 +3,7 @@
 //  MDBSwiftWrapper
 //
 //  Created by George Kye on 2016-02-16.
-//  Copyright © 2016 George KyeKye. All rights reserved.
+//  Copyright © 2016 George Kye. All rights reserved.
 //
 
 import Foundation
@@ -18,7 +18,6 @@ public struct belongstocollectionMovieMDB{
     name = results["name"].string
     poster_path = results["poster_path"].string
     backdrop_path = results["backdrop_path"].string
-    
   }
   
 }
@@ -48,7 +47,7 @@ open class MovieDetailedMDB: MovieMDB {
   
   required public init(results: JSON) {
     super.init(results: results)
-    belongs_to_collection = belongstocollectionMovieMDB(results: results["belong_to_collection"])
+    belongs_to_collection = belongstocollectionMovieMDB(results: results["belongs_to_collection"])
     budget = results["budget"].int
     homepage = results["homepage"].string
     imdb_id = results["imdb_id"].int
@@ -72,3 +71,4 @@ open class MovieDetailedMDB: MovieMDB {
   
   
 }
+
