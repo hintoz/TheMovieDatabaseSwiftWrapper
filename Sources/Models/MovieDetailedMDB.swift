@@ -52,18 +52,24 @@ open class MovieDetailedMDB: MovieMDB {
     homepage = results["homepage"].string
     imdb_id = results["imdb_id"].int
     
-    for i in 0...results["production_companies"].count{
-      production_companies?.append(KeywordsMDB.init(results: results["production_companies"][i]))
+    if(results["production_companies"].exists()){
+        production_companies = results["production_companies"].map{
+            KeywordsMDB.init(results: $0.1)
+        }
     }
     
-    for i in 0...results["production_countries"].count{
-      production_countries?.append(KeywordsMDB.init(results: results["production_countries"][i]))
+    if(results["production_countries"].exists()){
+        production_countries = results["production_countries"].map{
+            KeywordsMDB.init(results: $0.1)
+        }
     }
     revenue = results["revenue"].int
     runtime = results["runtime"].int
     
-    for i in 0...results["spoken_languages"].count{
-      spoken_languages?.append(SpokenLanguages.init(results: results["spoken_languages"][i]))
+    if(results["spoken_languages"].exists()){
+        spoken_languages = results["spoken_languages"].map{
+            SpokenLanguages.init(results: $0.1)
+        }
     }
     status = results["status"].string
     tagline = results["tagline"].string
