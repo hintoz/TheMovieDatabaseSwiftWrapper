@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import TMDBSwift
+@testable import TMDBSwiftMac
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
