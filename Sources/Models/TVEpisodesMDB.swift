@@ -65,7 +65,7 @@ public struct TVEpisodesMDB: ArrayObject {
     Client.Seasons(urltype,  language: nil){
       apiReturn in
       var data: TVCreditsMDB?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = TVCreditsMDB.init(results: apiReturn.json!)
       }
       completion(apiReturn, data)
@@ -78,7 +78,7 @@ public struct TVEpisodesMDB: ArrayObject {
     Client.Seasons(urltype,  language: language){
       apiReturn in
       var data: ExternalIdsMDB?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = ExternalIdsMDB.init(results: apiReturn.json!)
       }
       completion(apiReturn, data)
@@ -91,7 +91,7 @@ public struct TVEpisodesMDB: ArrayObject {
     Client.Seasons(urltype,  language: nil){
       apiReturn in
       var data: ImagesMDB?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = ImagesMDB.init(results: apiReturn.json!)
       }
       completion(apiReturn, data)
@@ -104,7 +104,7 @@ public struct TVEpisodesMDB: ArrayObject {
     Client.Seasons(urltype,  language: language){
       apiReturn in
       var data: [VideosMDB]?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = VideosMDB.initialize(json: apiReturn.json!["results"])
       }
       completion(apiReturn, data)

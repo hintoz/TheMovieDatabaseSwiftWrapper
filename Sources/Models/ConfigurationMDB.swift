@@ -36,7 +36,7 @@ public struct ConfigurationMDB {
     Client.Configuration(){
       apiReturn in
       //var aReturn = apiReturn
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         completion(apiReturn, ConfigurationMDB.init(results: apiReturn.json!))
       }else{
         completion(apiReturn, nil)

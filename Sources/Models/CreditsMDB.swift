@@ -86,7 +86,7 @@ public struct CreditsMDB{
   public static func credits(creditID: String, language: String, completion: @escaping (_ clientReturn: ClientReturn, _ data: CreditsMDB?) -> ()) -> (){
     Client.Credits(creditID: creditID, language: language){
       apiReturn in
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         completion(apiReturn, CreditsMDB.init(credits: apiReturn.json!))
       }else{
         completion(apiReturn, nil)

@@ -20,7 +20,7 @@ open class GenresMDB: KeywordsMDB{
   open class func genres(listType: GenresListType, language: String?, completion: @escaping (_ clientReturn: ClientReturn, _ data: [GenresMDB]?) -> ()) -> (){
     Client.Genres(listType: listType.rawValue, language: language, genreId: 0, page: nil, include_all_movies: nil, include_adult: nil, movieList: false){
       apiReturn in
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         completion(apiReturn, GenresMDB.initialize(json: apiReturn.json!["genres"]))
       }else{
         completion(apiReturn, nil)
@@ -32,7 +32,7 @@ open class GenresMDB: KeywordsMDB{
   open class func genre_movies(genreId: Int, include_adult_movies: Bool, language: String?, completion: @escaping (_ clientReturn: ClientReturn, _ data: [MovieMDB]?) -> ()) -> (){
     Client.Genres(listType: "movies", language: language, genreId: genreId, page: nil, include_all_movies: true, include_adult: nil, movieList: true){
       apiReturn in
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         completion(apiReturn, MovieMDB.initialize(json: apiReturn.json!["results"]))
       }else{
         completion(apiReturn, nil)

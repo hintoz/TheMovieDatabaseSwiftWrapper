@@ -7,7 +7,7 @@ public struct SearchMDB{
       apiReturn in
       
       var company = [parent_companymdb]()
-      if apiReturn.error == nil{
+      if apiReturn.json != nil{
         if(apiReturn.json!["results"].count > 0){
           company = parent_companymdb.initialize(json: apiReturn.json!["results"])
         }
@@ -24,7 +24,7 @@ public struct SearchMDB{
       apiReturn in
       
       var collection = [CollectionMDB]()
-      if apiReturn.error == nil{
+      if apiReturn.json != nil{
         if(apiReturn.json!["results"].count > 0){
           collection = CollectionMDB.initialize(json: apiReturn.json!["results"])
         }
@@ -40,7 +40,7 @@ public struct SearchMDB{
       apiReturn in
       
       var keyword = [KeywordsMDB]()
-      if apiReturn.error == nil{
+      if apiReturn.json != nil{
         if(apiReturn.json!["results"].count > 0){
           keyword = KeywordsMDB.initialize(json: apiReturn.json!["results"])
         }
@@ -56,7 +56,7 @@ public struct SearchMDB{
       apiReturn in
       
       var list: [ListsMDB]?
-      if apiReturn.error == nil{
+      if apiReturn.json != nil{
         if(apiReturn.json!["results"].count > 0){
           list = ListsMDB.initialize(json: apiReturn.json!["results"])
         }
@@ -71,7 +71,7 @@ public struct SearchMDB{
     
     Client.Search("movie",  query: query, page: page, language: language, include_adult: includeAdult, year: year, primary_release_year: primaryReleaseYear, search_type: nil, first_air_date_year: nil) { apiReturn in
       var movie: [MovieMDB]?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         if(apiReturn.json!["results"].count > 0){
           movie = MovieMDB.initialize(json: apiReturn.json!["results"])
         }
@@ -85,7 +85,7 @@ public struct SearchMDB{
     
     Client.Search("person",  query: query, page: page, language: nil, include_adult: includeAdult, year: nil, primary_release_year: nil, search_type: nil, first_air_date_year: nil) { apiReturn in
       var person: [PersonResults]?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         if(apiReturn.json!["results"].count > 0){
           person = PersonResults.initialize(json: apiReturn.json!["results"])
         }
@@ -99,7 +99,7 @@ public struct SearchMDB{
     
     Client.Search("tv",  query: query, page: page, language: language, include_adult: nil, year: nil, primary_release_year: nil, search_type: nil, first_air_date_year: first_air_date_year) { apiReturn in
       var person: [TVMDB]?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         if(apiReturn.json!["results"].count > 0){
           person = TVMDB.initialize(json: apiReturn.json!["results"])
         }

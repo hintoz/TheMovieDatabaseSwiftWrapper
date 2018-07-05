@@ -44,7 +44,7 @@ public struct PersonMDB: ArrayObject{
     Client.Person(urlType,  language: nil, page: nil){
       apiReturn in
       var data: PersonMDB?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = PersonMDB.init(results: apiReturn.json!)
       }
       completion(apiReturn, data)
@@ -58,7 +58,7 @@ public struct PersonMDB: ArrayObject{
     Client.Person(urlType,  language: language, page: nil){
       apiReturn in
       var data: PersonMovieCredits?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = PersonMovieCredits.init(json: apiReturn.json!)
       }
       completion(apiReturn, data)
@@ -70,7 +70,7 @@ public struct PersonMDB: ArrayObject{
     Client.Person(urlType,  language: language, page: nil){
       apiReturn in
       var data: PersonTVCredits?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = PersonTVCredits.init(json: apiReturn.json!)
       }
       completion(apiReturn, data)
@@ -83,7 +83,7 @@ public struct PersonMDB: ArrayObject{
     Client.Person(urlType,  language: language, page: nil){
       apiReturn in
       var data: PersonCreditsCombined?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = PersonCreditsCombined.init(json: apiReturn.json!)
       }
       completion(apiReturn, data)
@@ -96,7 +96,7 @@ public struct PersonMDB: ArrayObject{
     Client.Person( String(personID) + "/external_ids",  language: nil, page: nil){
       apiReturn in
       var data: ExternalIdsMDB?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = ExternalIdsMDB.init(results: apiReturn.json!)
       }
       completion(apiReturn, data)
@@ -108,7 +108,7 @@ public struct PersonMDB: ArrayObject{
     Client.Person( String(personID) + "/images",  language: nil, page: nil){
       apiReturn in
       var images: [Images_MDB]?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         images = Images_MDB.initialize(json: apiReturn.json!["profiles"])
       }
       completion(apiReturn, images)
@@ -132,7 +132,7 @@ public struct PersonMDB: ArrayObject{
     Client.Person("latest",  language: nil, page: nil){
       apiReturn in
       var data: PersonMDB?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = PersonMDB.init(results: apiReturn.json!)
       }
       completion(apiReturn, data)
@@ -144,7 +144,7 @@ public struct PersonMDB: ArrayObject{
     Client.Person("popular",  language: nil, page: page){
       apiReturn in
       var data: [PersonResults]?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = PersonResults.initialize(json: apiReturn.json!["results"])
       }
       completion(apiReturn, data)
@@ -157,7 +157,7 @@ public struct PersonMDB: ArrayObject{
     Client.Person(urlType,  language: nil, page: nil, append_to: append_to){
       apiReturn in
       var data: PersonMDB?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = PersonMDB.init(results: apiReturn.json!)
       }
       completion(apiReturn, data, apiReturn.json)

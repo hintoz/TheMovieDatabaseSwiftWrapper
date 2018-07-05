@@ -26,7 +26,7 @@ extension TVMDB{
     Client.TV(String(tvShowID),  page: nil, language: language, timezone: nil){
       apiReturn in
       var data: TVDetailedMDB?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = TVDetailedMDB.init(results: apiReturn.json!)
       }
       completion(apiReturn, data)
@@ -38,7 +38,7 @@ extension TVMDB{
     Client.TV( String(tvShowID) + "/alternative_titles",  page: nil, language: nil, timezone: nil){
       apiReturn in
       var data: Alternative_TitlesMDB?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = Alternative_TitlesMDB.init(results: apiReturn.json!)
       }
       completion(apiReturn, data)
@@ -50,7 +50,7 @@ extension TVMDB{
     Client.TV(String(tvShowID) + "/content_ratings",  page: nil, language: nil, timezone: nil){
       apiReturn in
       var data: [Content_RatingsMDB]?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = Content_RatingsMDB.initialize(json: apiReturn.json!["results"])
       }
       completion(apiReturn, data)
@@ -62,7 +62,7 @@ extension TVMDB{
     Client.TV(String(tvShowID) + "/credits",  page: nil, language: nil, timezone: nil){
       apiReturn in
       var data: TVCreditsMDB?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data =  TVCreditsMDB.init(results: apiReturn.json!)
       }
       completion(apiReturn, data)
@@ -74,7 +74,7 @@ extension TVMDB{
     Client.TV(String(tvShowID) + "/external_ids",  page: nil, language: language, timezone: nil){
       apiReturn in
       var data: ExternalIdsMDB?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = ExternalIdsMDB.init(results: apiReturn.json!)
       }
       completion(apiReturn, data)
@@ -86,7 +86,7 @@ extension TVMDB{
     Client.TV(String(tvShowID) + "/images",  page: nil, language: language, timezone: nil){
       apiReturn in
       var data: ImagesMDB?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = ImagesMDB.init(results: apiReturn.json!)
       }
       completion(apiReturn, data)
@@ -98,7 +98,7 @@ extension TVMDB{
     Client.TV(String(tvShowID) + "/keywords",  page: nil, language: nil, timezone: nil){
       apiReturn in
       var data: [KeywordsMDB]?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = KeywordsMDB.initialize(json: apiReturn.json!["results"])
       }
       completion(apiReturn, data)
@@ -110,7 +110,7 @@ extension TVMDB{
     Client.TV(String(tvShowID) + "/similar",  page: page, language: language, timezone: nil){
       apiReturn in
       var data: [TVMDB]?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         if(apiReturn.json!["results"].count > 0){
           data = TVMDB.initialize(json: apiReturn.json!["results"])
         }
@@ -123,7 +123,7 @@ extension TVMDB{
     Client.TV(String(tvShowID) + "/translations",  page: nil, language: nil, timezone: nil){
       apiReturn in
       var data: [TranslationsMDB]?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = TranslationsMDB.initialize(json: apiReturn.json!["translations"])
       }
       completion(apiReturn, data)
@@ -136,7 +136,7 @@ extension TVMDB{
     Client.TV(String(tvShowID) + "/videos",  page: nil, language: language, timezone: nil){
       apiReturn in
       var data: [VideosMDB]?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = VideosMDB.initialize(json: apiReturn.json!["results"])
       }
       completion(apiReturn, data)
@@ -148,7 +148,7 @@ extension TVMDB{
     Client.TV("latest",  page: nil, language: nil, timezone: nil){
       apiReturn in
       var data: TVDetailedMDB?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = TVDetailedMDB.init(results: apiReturn.json!)
       }
       completion(apiReturn, data)
@@ -160,7 +160,7 @@ extension TVMDB{
     Client.TV("on_the_air",  page: page, language: language, timezone: nil){
       apiReturn in
       var data: [TVMDB]?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         if(apiReturn.json!["results"].count > 0){
           data = TVMDB.initialize(json: apiReturn.json!["results"])
         }
@@ -174,7 +174,7 @@ extension TVMDB{
     Client.TV("airing_today",  page: page, language: language, timezone: timezone){
       apiReturn in
       var data: [TVMDB]?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         if(apiReturn.json!["results"].count > 0){
           data = TVMDB.initialize(json: apiReturn.json!["results"])
         }
@@ -188,7 +188,7 @@ extension TVMDB{
     Client.TV("top_rated",  page: page, language: language, timezone: nil){
       apiReturn in
       var data: [TVMDB]?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         if(apiReturn.json!["results"].count > 0){
           data = TVMDB.initialize(json: apiReturn.json!["results"])
         }
@@ -202,7 +202,7 @@ extension TVMDB{
     Client.TV("popular",  page: page, language: language, timezone: nil){
       apiReturn in
       var data: [TVMDB]?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         if(apiReturn.json!["results"].count > 0){
           data = TVMDB.initialize(json: apiReturn.json!["results"])
         }
@@ -217,7 +217,7 @@ extension TVMDB{
     Client.TV(queryType.rawValue,  page: page, language: language, timezone: nil){
       apiReturn in
       var data: [TVMDB]?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         if(apiReturn.json!["results"].count > 0){
           data = TVMDB.initialize(json: apiReturn.json!["results"])
         }
@@ -235,7 +235,7 @@ extension TVMDB{
     Client.TV(String(tvShowID),  page: nil, language: language, timezone: nil, append_to: append_to){
       apiReturn in
       var data: TVDetailedMDB?
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         data = TVDetailedMDB.init(results: apiReturn.json!)
       }
       completion(apiReturn, data, apiReturn.json)

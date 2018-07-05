@@ -36,7 +36,7 @@ public struct CollectionMDB: ArrayObject{
   public static func collection(collectionId: Int!, language: String? = nil, completion: @escaping (_ clientReturn: ClientReturn, _ data: CollectionMDB?) -> ()) -> (){
     Client.Collection(collectionId: String(collectionId), language: language){
       apiReturn in
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         completion(apiReturn, CollectionMDB(results: apiReturn.json!))
       }else{
         completion(apiReturn, nil)
@@ -48,7 +48,7 @@ public struct CollectionMDB: ArrayObject{
   public static func collectionImages(collectionId: Int!, language: String?, completion:  @escaping (_ clientReturn: ClientReturn, _ data: ImagesMDB?) -> ()) -> (){
     Client.Collection(collectionId:  String(collectionId) + "/images", language: language){
       apiReturn in
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         completion(apiReturn, ImagesMDB.init(results: apiReturn.json!))
       }else{
         completion(apiReturn, nil)

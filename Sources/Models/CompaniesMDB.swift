@@ -43,7 +43,7 @@ open class CompanyMDB {
   open class func companyInfo(companyId: Int!, completion: @escaping (_ clientReturn: ClientReturn, _ data:CompanyMDB?) -> ()) -> (){
     Client.Company(companyId: companyId){
       apiReturn in
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         completion(apiReturn, CompanyMDB(results: apiReturn.json!))
       }else{
         completion(apiReturn, nil)
@@ -55,7 +55,7 @@ open class CompanyMDB {
   open class func companyMovies(companyId: Int!, language: String?, page: Int?, completion: @escaping (_ clientReturn: ClientReturn, _ data: [MovieMDB]?) -> ()) -> (){
     Client.Company(companyId: companyId, language: language, page: page){
       apiReturn in
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         completion(apiReturn, MovieMDB.initialize(json: apiReturn.json!["results"]))
       }else{
         completion(apiReturn, nil)

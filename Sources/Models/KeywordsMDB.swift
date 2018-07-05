@@ -24,7 +24,7 @@ open class KeywordsMDB: ArrayObject{
     let url = "https://api.themoviedb.org/3/keyword/" + String(keywordId)
     Client.keyword(url){
       apiReturn in
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         completion(apiReturn, KeywordsMDB.init(results: apiReturn.json!))
       }else{
         completion(apiReturn, nil)
@@ -37,7 +37,7 @@ open class KeywordsMDB: ArrayObject{
     let url = "https://api.themoviedb.org/3/keyword/" + String(keywordId) + "/movies"
     Client.keyword_movies(url, page: page, language: language){
       apiReturn in
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         completion(apiReturn, MovieMDB.initialize(json: apiReturn.json!["results"]))
       }else{
         completion(apiReturn, nil)

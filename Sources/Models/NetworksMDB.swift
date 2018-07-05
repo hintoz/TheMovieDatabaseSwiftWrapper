@@ -22,7 +22,7 @@ public struct NetworksMDB{
   public static func networks(networkId: Int!, completion: @escaping (_ clientReturn: ClientReturn, _ data:NetworksMDB?) -> ()) -> (){
     Client.networks(networkId: networkId){
       apiReturn in
-      if(apiReturn.error == nil){
+      if(apiReturn.json != nil){
         completion(apiReturn, NetworksMDB.init(results: apiReturn.json!))
       }else{
         completion(apiReturn, nil)
