@@ -32,8 +32,8 @@ public struct ReviewsMDB{
     Client.review(reviewId: reviewId){
       apiReturn in
       var data: ReviewsMDB?
-      if(apiReturn.json != nil){
-        data = ReviewsMDB(results: apiReturn.json!)
+      if let json = apiReturn.json {
+        data = ReviewsMDB(results: json)
       }
       completion(apiReturn, data)
     }
